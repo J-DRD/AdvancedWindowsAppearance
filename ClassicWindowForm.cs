@@ -11,21 +11,21 @@ using System.Windows.Forms;
 
 namespace AdvancedWindowsAppearence
 {
-    public partial class ClassicWindowForm : Form
-    {
-        [DllImport("uxtheme.dll")]
-        private static extern int SetWindowTheme(IntPtr hWnd, string appname, string idlist);
+	public partial class ClassicWindowForm : Form
+	{
+		[DllImport("uxtheme.dll")]
+		private static extern int SetWindowTheme(IntPtr hWnd, string appname, string idlist);
 
-        public ClassicWindowForm()
-        {
-            InitializeComponent();
-            SetWindowTheme(this.Handle, "", "");
-            this.Font = SystemFonts.DialogFont;
-        }
+		public ClassicWindowForm()
+		{
+			InitializeComponent();
+			SetWindowTheme(this.Handle, string.Empty, string.Empty);
+			this.Font = SystemFonts.DialogFont;
+		}
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-    }
+		private void button1_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
+	}
 }

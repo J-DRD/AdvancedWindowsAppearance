@@ -1,38 +1,37 @@
 ﻿<Page x:Class="AdvancedWindowsAppearence.Previews.WallpaperSelectionPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:AdvancedWindowsAppearence.Previews"
       xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls"
-      mc:Ignorable="d" 
-      
+      mc:Ignorable="d"
+
       Title="WallpaperSelectionPage">
 
     <Page.Resources>
         <ResourceDictionary>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Page.Resources>
-    
-    
+
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!--Wallpaper background preview-->
-        <controls:WallpaperControl/>
+        <controls:WallpaperControl />
 
         <!--Wallpaper style-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Label Content="Path: " Grid.Column="0" Padding="0" Style="{StaticResource SystemLabel}" />
             <Label Grid.Column="1" Margin="5 0" Content="{Binding Wallpaper.Path}" Padding="0" Style="{StaticResource SystemLabel}" ToolTip="{Binding Wallpaper.Path}" />
@@ -41,8 +40,8 @@
 
         <!--Wallpaper style-->
         <StackPanel Orientation="Vertical" Grid.Row="2">
-            <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: "/>
-            <ComboBox x:Name="ImageStretchComboBox" Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}"/>
+            <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: " />
+            <ComboBox x:Name="ImageStretchComboBox" Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}" />
         </StackPanel>
     </Grid>
 </Page>

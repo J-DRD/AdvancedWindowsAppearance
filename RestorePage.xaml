@@ -7,56 +7,55 @@
         mc:Ignorable="d"
         Background="{DynamicResource BackgroundColor}"
         Title="Backup and restore">
-    
+
     <Page.Resources>
         <Style x:Key="bulletStyle" TargetType="RadioButton">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
         </Style>
     </Page.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1">
-            
+
             <Label Foreground="{DynamicResource ForegroundColor}">Restore Windows defaults:</Label>
-            <StackPanel x:Name="stackPanelBullets" >
+            <StackPanel x:Name="stackPanelBullets">
                 <RadioButton Style="{StaticResource bulletStyle}" Content="Restore DWM related settings (from 'Modern App Settings' tab)" Click="RadioButton_Click" />
-                <RadioButton Style="{StaticResource bulletStyle}" Content="Restore all theme related settings" Click="RadioButton_Click"/>
-                <RadioButton Style="{StaticResource bulletStyle}" Content="Restore all colors" Click="RadioButton_Click"/>
-                <RadioButton Style="{StaticResource bulletStyle}" Content="Restore fonts and metrics" Click="RadioButton_Click"/>
-                <RadioButton Style="{StaticResource bulletStyle}" FontWeight="Bold" Content="Restore all from these options" Click="RadioButton_Click"/>
+                <RadioButton Style="{StaticResource bulletStyle}" Content="Restore all theme related settings" Click="RadioButton_Click" />
+                <RadioButton Style="{StaticResource bulletStyle}" Content="Restore all colors" Click="RadioButton_Click" />
+                <RadioButton Style="{StaticResource bulletStyle}" Content="Restore fonts and metrics" Click="RadioButton_Click" />
+                <RadioButton Style="{StaticResource bulletStyle}" FontWeight="Bold" Content="Restore all from these options" Click="RadioButton_Click" />
             </StackPanel>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="labelInfo" Grid.Column="1" Style="{StaticResource InfoText}" Margin="5" Text="Click on 'Confirm' to do the restore according your selection"/>
-                <Button x:Name="buttonConfirm" Content="Confirm" VerticalAlignment="Center" Style="{StaticResource SystemButton}" Margin="5" Padding="20 2" Click="buttonConfirm_Click"/>
+                <TextBlock x:Name="labelInfo" Grid.Column="1" Style="{StaticResource InfoText}" Margin="5" Text="Click on 'Confirm' to do the restore according your selection" />
+                <Button x:Name="buttonConfirm" Content="Confirm" VerticalAlignment="Center" Style="{StaticResource SystemButton}" Margin="5" Padding="20 2" Click="buttonConfirm_Click" />
             </Grid>
 
             <Label Foreground="{DynamicResource ForegroundColor}">Restore from file:</Label>
             <StackPanel>
-                <Button x:Name="importReg" Content="Open file" Style="{StaticResource SystemButton}" Padding="20 2" Margin="5" HorizontalAlignment="Left" Click="importReg_Click"/>
-                <TextBlock x:Name="openRestoreFolder" Text="Open folder with my saved settings" Style="{StaticResource HypertextTextBlockStyle}" Padding="10 2" Margin="0 0 0 5" PreviewMouseDown="openRestoreFolder_PreviewMouseDown"/>
+                <Button x:Name="importReg" Content="Open file" Style="{StaticResource SystemButton}" Padding="20 2" Margin="5" HorizontalAlignment="Left" Click="importReg_Click" />
+                <TextBlock x:Name="openRestoreFolder" Text="Open folder with my saved settings" Style="{StaticResource HypertextTextBlockStyle}" Padding="10 2" Margin="0 0 0 5" PreviewMouseDown="openRestoreFolder_PreviewMouseDown" />
             </StackPanel>
-            
+
              <Grid Grid.Row="3" Margin="0 20 0 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="exportToReg" Content="Export current settings" Style="{StaticResource SystemButton}" Padding="10 0" Margin="5" Click="exportToReg_Click"/>
+                <Button x:Name="exportToReg" Content="Export current settings" Style="{StaticResource SystemButton}" Padding="10 0" Margin="5" Click="exportToReg_Click" />
             </Grid>
-
         </StackPanel>
     </Grid>
 </Page>

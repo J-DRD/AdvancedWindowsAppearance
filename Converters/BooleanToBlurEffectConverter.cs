@@ -10,22 +10,22 @@ using System.Windows.Media.Effects;
 
 namespace AdvancedWindowsAppearence.Converters
 {
-    internal class BooleanToBlurEffectConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            bool enabled = (bool)value;
+	internal class BooleanToBlurEffectConverter : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			bool enabled = (bool)value;
 
-            if (!enabled)
-                return null;
-            BlurEffect blurEffect = new BlurEffect();
-            blurEffect.Radius = 5;
-            return blurEffect;
-        }
+			if (!enabled)
+				return null;
+			BlurEffect blurEffect = new BlurEffect();
+			blurEffect.Radius = 5;
+			return blurEffect;
+		}
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

@@ -1,28 +1,28 @@
 ﻿<Page x:Class="AdvancedWindowsAppearence.Previews.SlideshowSettingsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:AdvancedWindowsAppearence.Previews"
       xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       Title="ScreenslideSettingsPage">
     <Page.Resources>
         <ResourceDictionary>
-            <converters:BrushToColorConverter x:Key="brushToColor"/>
-            <converters:WallpaperStyleToImageStretchConverter x:Key="WallpaperStyleToImageStretch"/>
+            <converters:BrushToColorConverter x:Key="brushToColor" />
+            <converters:WallpaperStyleToImageStretchConverter x:Key="WallpaperStyleToImageStretch" />
         </ResourceDictionary>
     </Page.Resources>
 
     <StackPanel Margin="5">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Label>Folder:</Label>
-            <Label Grid.Column="1" Content="{Binding Slideshow.Folder}" Foreground="{DynamicResource ForegroundColor}"/>
+            <Label Grid.Column="1" Content="{Binding Slideshow.Folder}" Foreground="{DynamicResource ForegroundColor}" />
             <Button x:Name="ChangeFolderButton" Grid.Column="2" Style="{DynamicResource SystemButton}" Content="Change" MinWidth="100" Click="ChangeFolderButton_Click" />
         </Grid>
         <ItemsControl x:Name="ImagesListView" ItemsSource="{Binding Slideshow.FolderImages}">
@@ -32,39 +32,38 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
-                <DataTemplate >
+                <DataTemplate>
                     <Grid MaxWidth="200" Margin="5">
-                        <Image Source="{Binding Path}" Width="320" Opacity="{Binding Opacity, Mode=OneWay}" Height="180" Stretch="{Binding WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"/>
-                        <CheckBox Content="" IsChecked="{Binding IsSelected}"/>
+                        <Image Source="{Binding Path}" Width="320" Opacity="{Binding Opacity, Mode=OneWay}" Height="180" Stretch="{Binding WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}" />
+                        <CheckBox Content="" IsChecked="{Binding IsSelected}" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-
         </ItemsControl>
         <!--Buttons for selection-->
         <StackPanel Orientation="Horizontal">
-            <Button x:Name="buttonSelectAll" Content="Select all" Style="{DynamicResource SystemSmallButton}" MinWidth="100" Click="buttonSelectAll_Click"/>
-            <Button x:Name="buttonClear" Content="Clear selection" Style="{DynamicResource SystemSmallButton}" MinWidth="100" Click="buttonClear_Click"/>
+            <Button x:Name="buttonSelectAll" Content="Select all" Style="{DynamicResource SystemSmallButton}" MinWidth="100" Click="buttonSelectAll_Click" />
+            <Button x:Name="buttonClear" Content="Clear selection" Style="{DynamicResource SystemSmallButton}" MinWidth="100" Click="buttonClear_Click" />
         </StackPanel>
-        
+
         <!--Wallpaper style-->
         <StackPanel Orientation="Vertical" Grid.Row="2">
-            <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: "/>
-            <ComboBox x:Name="ImageStretchComboBox" Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}"/>
+            <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: " />
+            <ComboBox x:Name="ImageStretchComboBox" Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}" />
         </StackPanel>
 
         <!--Shuffle-->
-        <CheckBox Content="Shuffle" IsChecked="{Binding Slideshow.Shuffle.IsChecked}" Foreground="{DynamicResource ForegroundColor}" Margin="5"/>
+        <CheckBox Content="Shuffle" IsChecked="{Binding Slideshow.Shuffle.IsChecked}" Foreground="{DynamicResource ForegroundColor}" Margin="5" />
         <!--Change Interval-->
         <StackPanel Orientation="Horizontal">
-            <Label Content="Time to change slide (in milliseconds): " Style="{DynamicResource SystemLabel}"/>
-            <TextBox Text="{Binding Slideshow.Interval.Value}" Height="35" Width="100"/>
+            <Label Content="Time to change slide (in milliseconds): " Style="{DynamicResource SystemLabel}" />
+            <TextBox Text="{Binding Slideshow.Interval.Value}" Height="35" Width="100" />
         </StackPanel>
-        
+
         <!--Restart explorer button-->
         <StackPanel MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
-            <TextBlock Text="Please consider restarting desktop (explorer.exe) process if changes you've made are not applied." Style="{StaticResource InfoText}" HorizontalAlignment="Left"/>
-            <Button x:Name="buttonRestartExplorer" Width="200" Content="Restart explorer.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartExplorer_Click"/>
+            <TextBlock Text="Please consider restarting desktop (explorer.exe) process if changes you've made are not applied." Style="{StaticResource InfoText}" HorizontalAlignment="Left" />
+            <Button x:Name="buttonRestartExplorer" Width="200" Content="Restart explorer.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartExplorer_Click" />
         </StackPanel>
     </StackPanel>
 </Page>

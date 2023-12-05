@@ -1,4 +1,5 @@
 ﻿using Octokit;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,75 +10,79 @@ using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    public class Updater
-    {
-        private IReleasesClient _releaseClient;
-        private GitHubClient Github;
-        private readonly string RepositoryOwner = "ArkadySK";
-        private readonly string RepositoryName = "AdvancedWindowsAppearance";
-        private readonly string PackageName = "AWA"; //the downloading package
-        Version CurrentVersion;
-        Version LatestVersion;
+	public class Updater
+	{
+		private IReleasesClient _releaseClient;
+		private GitHubClient Github;
+		private readonly string RepositoryOwner = "ArkadySK";
+		private readonly string RepositoryName = "AdvancedWindowsAppearance";
+		private readonly string PackageName = "AWA"; //the downloading package
+		private Version CurrentVersion;
+		private Version LatestVersion;
 
-        public Updater()
-        {           
-            CurrentVersion = GetCurrentVersionInfo();
+		public Updater()
+		{
+			CurrentVersion = GetCurrentVersionInfo();
 
-            Github = new GitHubClient(new ProductHeaderValue(RepositoryName + @"-UpdateCheck"));
-            _releaseClient = Github.Repository.Release;
-        }
+			Github = new GitHubClient(new ProductHeaderValue(RepositoryName + @"-UpdateCheck"));
+			_releaseClient = Github.Repository.Release;
+		}
 
-        public Version GetCurrentVersionInfo()
-        {
-            return Assembly.GetExecutingAssembly().GetName().Version;
-        }
-        public async Task<bool> IsUpToDate()
-        {
-            Version newVersion = await GetNewVersionInfoAsync();
+		public Version GetCurrentVersionInfo()
+		{
+			return Assembly.GetExecutingAssembly().GetName().Version;
+		}
 
-            return (newVersion == CurrentVersion);
-        }
+		public async Task<bool> IsUpToDate()
+		{
+			Version newVersion = await GetNewVersionInfoAsync();
 
-        #region get new version name
-        private Version StringToVersion(string versionString)
-        {
-            versionString = versionString.Replace("v", string.Empty);
-            try
-            {
-                return new Version(versionString);
+			return (newVersion == CurrentVersion);
+		}
 
-            }
-            catch {
-                versionString = versionString.Replace("-beta", string.Empty);
-                versionString = versionString.Replace("-alpha", string.Empty);
-                return new Version(versionString);
-            }
-        }
+		#region get new version name
 
-        public async Task<Version> GetNewVersionInfoAsync()
-        {
-            if (String.IsNullOrWhiteSpace(RepositoryName) || String.IsNullOrWhiteSpace(RepositoryOwner)) return null;
+		private Version StringToVersion(string versionString)
+		{
+			versionString = versionString.Replace("v", string.Empty);
+			try
+			{
+				return new Version(versionString);
+			}
+			catch
+			{
+				versionString = versionString.Replace("-beta", string.Empty);
+				versionString = versionString.Replace("-alpha", string.Empty);
+				return new Version(versionString);
+			}
+		}
 
-            var allReleases = await _releaseClient.GetAll(RepositoryOwner, RepositoryName);
-            var latestRelease = allReleases.FirstOrDefault(release => StringToVersion(release.TagName) > CurrentVersion);
-            if (latestRelease != null)
-                LatestVersion = StringToVersion(latestRelease.TagName);
-            else
-                LatestVersion = CurrentVersion;
-            return LatestVersion;
-        }
-        #endregion
+		public async Task<Version> GetNewVersionInfoAsync()
+		{
+			if (String.IsNullOrWhiteSpace(RepositoryName) || String.IsNullOrWhiteSpace(RepositoryOwner)) return null;
 
+			var allReleases = await _releaseClient.GetAll(RepositoryOwner, RepositoryName);
+			var latestRelease = allReleases.FirstOrDefault(release => StringToVersion(release.TagName) > CurrentVersion);
+			if (latestRelease != null)
+				LatestVersion = StringToVersion(latestRelease.TagName);
+			else
+				LatestVersion = CurrentVersion;
+			return LatestVersion;
+		}
 
-        #region Download
-        public void DownloadUpdate()
-        {
-            const string urlTemplate = "https://github.com/{0}/{1}/releases/download/{2}/{3}";
-            var url = string.Format(urlTemplate, RepositoryOwner, RepositoryName, "v" + LatestVersion, PackageName+".zip");
+		#endregion get new version name
 
-            url = url.Replace("&", "^&");
-            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
-        }
-        #endregion
-    }
+		#region Download
+
+		public void DownloadUpdate()
+		{
+			const string urlTemplate = "https://github.com/{0}/{1}/releases/download/{2}/{3}";
+			var url = string.Format(urlTemplate, RepositoryOwner, RepositoryName, "v" + LatestVersion, PackageName + ".zip");
+
+			url = url.Replace("&", "^&");
+			Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+		}
+
+		#endregion Download
+	}
 }

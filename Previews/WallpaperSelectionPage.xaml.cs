@@ -15,32 +15,31 @@ using System.Windows.Shapes;
 
 namespace AdvancedWindowsAppearence.Previews
 {
-    /// <summary>
-    /// Interaction logic for WallpaperSelectionPage.xaml
-    /// </summary>
-    public partial class WallpaperSelectionPage : Page
-    {
-        WallpaperSettings WallpaperSettings;
-        public WallpaperSelectionPage(WallpaperSettings wallpaper)
-        {
-            InitializeComponent();
-            WallpaperSettings = wallpaper;
-            DataContext = WallpaperSettings;
-        }
+	/// <summary>
+	/// Interaction logic for WallpaperSelectionPage.xaml
+	/// </summary>
+	public partial class WallpaperSelectionPage : Page
+	{
+		private WallpaperSettings WallpaperSettings;
 
-        private void changeWallpaper_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
-            dialog.Filter = "Supported Image Files (*.png, *.jpg, *.bmp)|*.png;*.jpg;*.bmp|All files (*.*)|*.*";
-            dialog.Title = "Select new wallpaper image";
-            var result = dialog.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                string path = dialog.FileName;
-                WallpaperSettings.Wallpaper.SetWallpaper(path);
-            }
+		public WallpaperSelectionPage(WallpaperSettings wallpaper)
+		{
+			InitializeComponent();
+			WallpaperSettings = wallpaper;
+			DataContext = WallpaperSettings;
+		}
 
-        }
-
-    }
+		private void changeWallpaper_Click(object sender, RoutedEventArgs e)
+		{
+			System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+			dialog.Filter = "Supported Image Files (*.png, *.jpg, *.bmp)|*.png;*.jpg;*.bmp|All files (*.*)|*.*";
+			dialog.Title = "Select new wallpaper image";
+			var result = dialog.ShowDialog();
+			if (result == System.Windows.Forms.DialogResult.OK)
+			{
+				string path = dialog.FileName;
+				WallpaperSettings.Wallpaper.SetWallpaper(path);
+			}
+		}
+	}
 }

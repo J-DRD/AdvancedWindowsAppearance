@@ -15,15 +15,15 @@ using System.Windows.Shapes;
 
 namespace AdvancedWindowsAppearence
 {
-    /// <summary>
-    /// Interaction logic for TitleColorsPreviewPage.xaml
-    /// </summary>
-    public partial class TitleColorsPreviewPage : Page
-    {
-        public TitleColorsPreviewPage()
-        {
-            InitializeComponent();
-            this.DataContext = Application.Current.MainWindow.DataContext;
-        }
-    }
+	/// <summary>
+	/// Interaction logic for TitleColorsPreviewPage.xaml
+	/// </summary>
+	public partial class TitleColorsPreviewPage : Page
+	{
+		public TitleColorsPreviewPage()
+		{
+			InitializeComponent();
+			this.DataContext = Application.Current.MainWindow.DataContext;
+		}
+	}
 }

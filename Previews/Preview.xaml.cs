@@ -15,15 +15,15 @@ using System.Windows.Shapes;
 
 namespace AdvancedWindowsAppearence
 {
-    /// <summary>
-    /// Interaction logic for Preview.xaml
-    /// </summary>
-    public partial class Preview : Page
-    {
-        public Preview()
-        {
-            InitializeComponent();
-            this.DataContext = Application.Current.MainWindow.DataContext;
-        }
-    }
+	/// <summary>
+	/// Interaction logic for Preview.xaml
+	/// </summary>
+	public partial class Preview : Page
+	{
+		public Preview()
+		{
+			InitializeComponent();
+			this.DataContext = Application.Current.MainWindow.DataContext;
+		}
+	}
 }

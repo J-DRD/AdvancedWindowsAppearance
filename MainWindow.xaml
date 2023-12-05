@@ -4,50 +4,48 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:AdvancedWindowsAppearence"
-    xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" 
-    xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls" 
+    xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters"
+    xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls"
     x:Name="window"
     x:Class="AdvancedWindowsAppearence.MainWindow"
-    mc:Ignorable="d" 
+    mc:Ignorable="d"
     Loaded="window_Loaded"
     Title="Advanced Windows Appearence" Width="970" Height="610" ResizeMode="CanResize">
 
-
     <Window.Resources>
         <ResourceDictionary>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            <converters:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
             <converters:BrushToColorConverter x:Key="brushToColor" />
-            <converters:DrawingColorToMediaColorConverter x:Key="DrawingColorToMediaColorConverter"/>
-            <converters:FontToFontFamilyConverter x:Key="FontToFontFamily"/>
-            <converters:BooleanToFontWeightConverter x:Key="BooleanToFontWeight"/>
-            <converters:BooleanToFontStyleConverter x:Key="BooleanToFontStyle"/>
-            <converters:MultiMarginConverter x:Key="multiMargin"/>
-            <converters:BooleanToBlurEffectConverter x:Key="BooleanToBlurEffect"/>
-            <converters:BooleanToIntConverter x:Key="BooleanToInt"/>
-            <converters:WallpaperStyleToImageStretchConverter x:Key="WallpaperStyleToImageStretch"/>
-            <converters:EnumToStringConverter x:Key="EnumToString"/>
+            <converters:DrawingColorToMediaColorConverter x:Key="DrawingColorToMediaColorConverter" />
+            <converters:FontToFontFamilyConverter x:Key="FontToFontFamily" />
+            <converters:BooleanToFontWeightConverter x:Key="BooleanToFontWeight" />
+            <converters:BooleanToFontStyleConverter x:Key="BooleanToFontStyle" />
+            <converters:MultiMarginConverter x:Key="multiMargin" />
+            <converters:BooleanToBlurEffectConverter x:Key="BooleanToBlurEffect" />
+            <converters:BooleanToIntConverter x:Key="BooleanToInt" />
+            <converters:WallpaperStyleToImageStretchConverter x:Key="WallpaperStyleToImageStretch" />
+            <converters:EnumToStringConverter x:Key="EnumToString" />
         </ResourceDictionary>
     </Window.Resources>
 
     <Grid x:Name="bgGrid" SizeChanged="bgGrid_SizeChanged">
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Rectangle x:Name="opaqueRectangle" Fill="{DynamicResource BackgroundColor}" Width="{Binding ActualWidth, ElementName=defaultScrollViewer}" Margin="0 -100" HorizontalAlignment="Right" Grid.RowSpan="3" />
 
         <Grid Panel.ZIndex="1000"  Visibility="{Binding IsSavingInProgress, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}">
-            <Rectangle Fill="{DynamicResource BackgroundColor}" Opacity=".88"/>
-            <TextBlock Text="Saving..." Style="{StaticResource InfoText}" VerticalAlignment="Center"/>
-
+            <Rectangle Fill="{DynamicResource BackgroundColor}" Opacity=".88" />
+            <TextBlock Text="Saving..." Style="{StaticResource InfoText}" VerticalAlignment="Center" />
         </Grid>
 
-        <StackPanel x:Name="SidepanelButtomTextStackPanel" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Panel.ZIndex="10" >
+        <StackPanel x:Name="SidepanelButtomTextStackPanel" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Panel.ZIndex="10">
             <CheckBox IsChecked="{Binding ApplicationSettings.SaveToRegistry}" Margin="5" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">Ignore theme settings</CheckBox>
             <CheckBox IsChecked="{Binding ApplicationSettings.ShowAllUI}" Margin="5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" >Show more settings</CheckBox>
             <TextBlock x:Name="versionNameTextBlock" Margin="5" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown">
                 <TextBlock.Effect>
-                    <DropShadowEffect BlurRadius="1" ShadowDepth="1" Opacity=".5"/>
+                    <DropShadowEffect BlurRadius="1" ShadowDepth="1" Opacity=".5" />
                 </TextBlock.Effect>
             </TextBlock>
         </StackPanel>
@@ -55,52 +53,51 @@
         <!--Main TabControl-->
         <TabControl Effect="{Binding IsSavingInProgress, Converter={StaticResource BooleanToBlurEffect}}" TabStripPlacement="Left" Margin="-1 0 0 0" x:Name="MainTabControl" BorderThickness="0" Background="{x:Null}">
 
-
             <!-- Theme Tab -->
-            <TabItem Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ApplicationSettings.ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}" >
+            <TabItem Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ApplicationSettings.ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE771;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE771;" />
                         <Label Style="{DynamicResource SystemMenuLabel}">Theme Settings</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <!--Theme Settings-->
                         <StackPanel>
-                            
+
                             <!-- Theme name -->
                             <Grid Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition MinWidth="200"/>
-                                    <ColumnDefinition Width="270"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition MinWidth="200" />
+                                    <ColumnDefinition Width="270" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Padding="2" Style="{StaticResource SystemLabel}">Theme Name</Label>
-                                <TextBox FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeSettings.ThemeName}"/>
+                                <TextBox FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeSettings.ThemeName}" />
                             </Grid>
 
                             <!-- Styles -->
                             <StackPanel Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
-                                <CheckBox Margin="0 5" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
+                                <CheckBox Margin="0 5" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked" />
                                 <!-- Style options -->
-                                <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false" >
-                                    <RadioButton Content="Aero (Windows default)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAero_Click"/>
-                                    <RadioButton Content="Aero Lite (has window border, better support for classic colors)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" 
-                                                 FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAeroLite_Click"/>
-                                    <RadioButton Content="High Contrast (more color options)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
+                                <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false">
+                                    <RadioButton Content="Aero (Windows default)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAero_Click" />
+                                    <RadioButton Content="Aero Lite (has window border, better support for classic colors)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center"
+                                                 FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAeroLite_Click" />
+                                    <RadioButton Content="High Contrast (more color options)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed" />
                                     <RadioButton x:Name="customStyle" Foreground="{DynamicResource ForegroundColor}" Margin="2" VerticalContentAlignment="Center">
                                         <StackPanel Orientation="Horizontal">
-                                            <Label Style="{DynamicResource SystemLabel}" Padding="0" Content="Custom: "/>
-                                            <TextBox IsEnabled="{Binding IsChecked, ElementName=customStyle}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" Width="200" 
-                                                     Text="{Binding ThemeSettings.ThemeStyle, UpdateSourceTrigger=LostFocus}"/>
-                                            <Button x:Name="buttonMsstylesFileDialog" Content="File..." Style="{DynamicResource SystemButton}" Click="buttonMsstylesFileDialog_Click"/>
+                                            <Label Style="{DynamicResource SystemLabel}" Padding="0" Content="Custom: " />
+                                            <TextBox IsEnabled="{Binding IsChecked, ElementName=customStyle}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" Width="200"
+                                                     Text="{Binding ThemeSettings.ThemeStyle, UpdateSourceTrigger=LostFocus}" />
+                                            <Button x:Name="buttonMsstylesFileDialog" Content="File..." Style="{DynamicResource SystemButton}" Click="buttonMsstylesFileDialog_Click" />
                                         </StackPanel>
                                     </RadioButton>
                                 </StackPanel>
@@ -110,32 +107,31 @@
                                     <TextBlock Style="{StaticResource InfoText}">Usage of custom (Non-Microsoft) .msstyles can break the UI of the system!</TextBlock>
                                     <TextBlock Style="{StaticResource InfoText}">The program cannot apply custom themes unless you have your system patched.</TextBlock>
                                 </StackPanel>
-                                <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Left" Margin="5" Click="buttonOpenControlPanel_Click"/>
-                                <TextBlock Margin="5" Style="{StaticResource HypertextTextBlockStyle}" Text="Open folder with saved themes" PreviewMouseDown="TextBlockOpenThemesFolder_PreviewMouseDown"/>
+                                <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Left" Margin="5" Click="buttonOpenControlPanel_Click" />
+                                <TextBlock Margin="5" Style="{StaticResource HypertextTextBlockStyle}" Text="Open folder with saved themes" PreviewMouseDown="TextBlockOpenThemesFolder_PreviewMouseDown" />
                             </StackPanel>
 
                             <!--Dark / Light modes selection-->
                             <StackPanel Margin="0 10 0 0" Visibility="{Binding IsWindows10, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <Label Style="{StaticResource SystemLabel}" Content="Apps color mode: "/>
+                                <Label Style="{StaticResource SystemLabel}" Content="Apps color mode: " />
                                 <ComboBox Style="{StaticResource SystemComboBox}" Margin="2" Width="300" HorizontalAlignment="Left" SelectedIndex="{Binding RegistrySettingsViewModel.RegistrySettings[5].Checked, Converter={StaticResource BooleanToInt}, Mode=TwoWay}">
                                     <ComboBoxItem>Dark</ComboBoxItem>
                                     <ComboBoxItem>Light</ComboBoxItem>
                                 </ComboBox>
-                                <Label Style="{StaticResource SystemLabel}" Content="Windows color mode: "/>
+                                <Label Style="{StaticResource SystemLabel}" Content="Windows color mode: " />
                                 <ComboBox Style="{StaticResource SystemComboBox}" Margin="2" Width="300" HorizontalAlignment="Left" SelectedIndex="{Binding RegistrySettingsViewModel.RegistrySettings[6].Checked, Converter={StaticResource BooleanToInt}, Mode=TwoWay}">
                                     <ComboBoxItem>Dark</ComboBoxItem>
                                     <ComboBoxItem>Light</ComboBoxItem>
                                 </ComboBox>
                             </StackPanel>
-
                         </StackPanel>
 
                         <!--The Apply buttons-->
                         <StackPanel Margin="-5 0 0 0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
-                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveThemeAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveThemeAsTheme_Click"/>
-                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveThemeToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveThemeToRegistry_Click"/>
-                            <CheckBox VerticalAlignment="Bottom" Content="Ignore theme settings, save to registry instead" Margin="5" IsChecked="{Binding ApplicationSettings.SaveToRegistry}" 
-                                      Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveThemeAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveThemeAsTheme_Click" />
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveThemeToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveThemeToRegistry_Click" />
+                            <CheckBox VerticalAlignment="Bottom" Content="Ignore theme settings, save to registry instead" Margin="5" IsChecked="{Binding ApplicationSettings.SaveToRegistry}"
+                                      Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
@@ -145,38 +141,38 @@
             <TabItem Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE737;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE737;" />
                         <Label Style="{DynamicResource SystemMenuLabel}">Title Colors</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0" Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="70"/>
-                                <ColumnDefinition Width="45"/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="45" />
                             </Grid.ColumnDefinitions>
                             <Label Style="{StaticResource SystemLabel}" Margin="1">Theme Color (Window Border)</Label>
                             <Button x:Name="buttonThemeColor" Grid.Column="4" Style="{StaticResource SystemSmallButton}" Click="buttonThemeColor_Click">
-                                <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" />
                             </Button>
                             <Label Style="{StaticResource SystemLabel}" Grid.Column="2" Margin="1">Opacity</Label>
                             <Slider VerticalAlignment="Center" x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" MinWidth="200" />
-                            <TextBox IsEnabled="False" Grid.Column="3" VerticalContentAlignment="Center" x:Name="textBoxColorOpacity" Margin="2" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" 
-                                     PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
+                            <TextBox IsEnabled="False" Grid.Column="3" VerticalContentAlignment="Center" x:Name="textBoxColorOpacity" Margin="2" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3"
+                                     PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged" />
                         </Grid>
 
                         <CheckBox Grid.Row="1" IsEnabled="{Binding IsWindows10, Mode=OneTime}" Margin="2 20 2 10" VerticalContentAlignment="Center" IsChecked="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}">Enable colored titlebars</CheckBox>
@@ -184,18 +180,18 @@
                         <ItemsControl x:Name="titleColorsItemsControl" Grid.Row="2" Focusable="False"  IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AeroColorsViewModel.AeroColors}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid HorizontalAlignment="Stretch" MinHeight="40" >
+                                    <Grid HorizontalAlignment="Stretch" MinHeight="40">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" MinWidth="40" />
-                                            <ColumnDefinition Width="45"/>
+                                            <ColumnDefinition Width="45" />
                                         </Grid.ColumnDefinitions>
-                                        <CheckBox x:Name="checkBoxAeroColorEnabled" Content="{Binding Name}" Margin="15 5" Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding Enabled}"/>
+                                        <CheckBox x:Name="checkBoxAeroColorEnabled" Content="{Binding Name}" Margin="15 5" Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding Enabled}" />
                                         <Button Content="&#xE78B;" FontFamily="{StaticResource Segoe MDL2 Assets}" IsEnabled="{Binding ThemeColor.ItemColor.HasValue}" Visibility="{Binding Enabled, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
-                                                FontSize="25" Grid.Column="2" Style="{StaticResource SystemSmallButton}" Click="ButtonColorSync_Click"/>
+                                                FontSize="25" Grid.Column="2" Style="{StaticResource SystemSmallButton}" Click="ButtonColorSync_Click" />
                                         <Button x:Name="buttonAeroColor" Grid.Column="3" Style="{StaticResource SystemSmallButton}" Click="buttonAeroColor_Click" IsEnabled="{Binding Enabled}">
-                                            <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                            <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" />
                                         </Button>
                                     </Grid>
                                 </DataTemplate>
@@ -203,30 +199,27 @@
                         </ItemsControl>
 
                         <!--Aero colors Preview-->
-                        <Frame Grid.Row="3" Margin="0 5 0 0" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Source="Previews\TitleColorsPreviewPage.xaml"/>
-
+                        <Frame Grid.Row="3" Margin="0 5 0 0" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Source="Previews\TitleColorsPreviewPage.xaml" />
 
                         <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.Row="5"
                                            >To access active / inactive title color setting, please check 'enable colored titlebars'. If you dont see that setting, your version of Windows is not supported. This works only on Windows 10/11</TextBlock>
                         <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Grid.Row="5"
                                            >To acces the main theme color, please uncheck 'Ignore theme settings' in Theme Settings.</TextBlock>
 
-                        
                         <!--The Apply buttons-->
                         <StackPanel Margin="-5 0 0 0" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
-                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveTitleColorsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveTitleColorsAsTheme_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveTitleColorsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveTitleColorsAsTheme_Click" />
                             <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveTitleColorsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveTitleColorsToRegistry_Click" />
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
 
-
             <!-- Colors a Metrics  -->
             <TabItem Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE2B1;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE2B1;" />
                         <Label Style="{DynamicResource SystemMenuLabel}">Colors and Metrics</Label>
                     </StackPanel>
                 </TabItem.Header>
@@ -234,159 +227,156 @@
 
                     <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="45"/>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="45" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <ComboBox x:Name="comboBoxItems" Style="{StaticResource SystemComboBox}" MinWidth="300" ItemsSource="{Binding ColorSettings}" SelectedIndex="13" Grid.Column="0" Margin="2">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Label Padding="0" Content="{Binding Name}"/>
+                                    <Label Padding="0" Content="{Binding Name}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <TextBox x:Name="textBoxItemSize" MinWidth="100" Text="{Binding SelectedItem.Size, ElementName=comboBoxItems}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxItems}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="1" Margin="2" 
-                             InputScope="Number" MaxLines="1" MaxLength="2" PreviewTextInput="NumberValidationTextBox"/>
+                        <TextBox x:Name="textBoxItemSize" MinWidth="100" Text="{Binding SelectedItem.Size, ElementName=comboBoxItems}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxItems}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="1" Margin="2"
+                             InputScope="Number" MaxLines="1" MaxLength="2" PreviewTextInput="NumberValidationTextBox" />
                         <Button x:Name="buttonItemColor" Style="{StaticResource SystemSmallButton}" Grid.Column="2" Click="buttonEditItemColor_Click" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxItems}">
                             <Button x:Name="imageItemColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxItems, Converter={StaticResource brushToColor}, Mode=OneWay}" />
                         </Button>
 
-                        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxItems, Mode=OneWay, FallbackValue=Collapsed}" 
+                        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxItems, Mode=OneWay, FallbackValue=Collapsed}"
                                            Style="{StaticResource InfoText}" >New sizes are applied after logoff. Some colors are applied immediatelly as a theme, some may apply after logoff.</TextBlock>
 
                         <!--Classic Colors preview page-->
-                        <Frame Source="Previews\Preview.xaml" Margin="0 5 0 0" Grid.Row="2" Grid.ColumnSpan="4"/>
-                        <TextBlock Style="{DynamicResource HypertextTextBlockStyle}" Text="Launch sample window with Classic theme" MouseDown="openClassicWindowTextBlock_MouseDown" Grid.Row="3" Grid.ColumnSpan="3"/>
-                        <TextBlock Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource InfoText}" 
+                        <Frame Source="Previews\Preview.xaml" Margin="0 5 0 0" Grid.Row="2" Grid.ColumnSpan="4" />
+                        <TextBlock Style="{DynamicResource HypertextTextBlockStyle}" Text="Launch sample window with Classic theme" MouseDown="openClassicWindowTextBlock_MouseDown" Grid.Row="3" Grid.ColumnSpan="3" />
+                        <TextBlock Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource InfoText}"
                                    >The most of these colors and sizes are not applied on modern UWP apps, because each of them uses their own settings.</TextBlock>
 
                         <!--The Apply buttons-->
                         <StackPanel Grid.Row="6" Margin="-5 0 0 0" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
-                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveColorsMetricsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveColorsMetricsAsTheme_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveColorsMetricsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveColorsMetricsAsTheme_Click" />
                             <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveColorsMetricsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveColorsMetricsToRegistry_Click" />
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
 
-
             <!-- Font Tab-->
             <TabItem x:Name="fontsTab" Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE1C8;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE1C8;" />
                         <Label Style="{DynamicResource SystemMenuLabel}">Fonts</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="45"/>
-                            <ColumnDefinition Width="45"/>
-                            <ColumnDefinition Width="45"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="45" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Label Content="Font:" Grid.Row="1" Style="{StaticResource SystemLabel}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
+                        <Label Content="Font:" Grid.Row="1" Style="{StaticResource SystemLabel}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5" />
 
                         <ComboBox x:Name="comboBoxFonts" Style="{StaticResource SystemComboBox}" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Margin="2" Grid.ColumnSpan="2">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Label Padding="0" Content="{Binding Name}"/>
+                                    <Label Padding="0" Content="{Binding Name}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
 
-                        <ComboBox x:Name="comboBoxFont" Style="{StaticResource SystemComboBox}" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" Grid.Column="1" Grid.Row="1" MinWidth="100" Margin="2" SelectionChanged="comboBoxFont_SelectionChanged"/>
+                        <ComboBox x:Name="comboBoxFont" Style="{StaticResource SystemComboBox}" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" Grid.Column="1" Grid.Row="1" MinWidth="100" Margin="2" SelectionChanged="comboBoxFont_SelectionChanged" />
                         <TextBox x:Name="textBlockPreview" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="2" Padding="0" FontSize="{Binding Text, ElementName=comboBoxFontSize, Mode=OneWay}" VerticalContentAlignment="Center"
-                             Foreground="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog" FontWeight="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" 
-                             FontStyle="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"/>
+                             Foreground="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog" FontWeight="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}"
+                             FontStyle="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={StaticResource FontToFontFamily}, Mode=OneWay}" />
 
-                        <ComboBox x:Name="comboBoxFontSize" MinWidth="100" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" 
-                                  FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="2" Margin="2" IsEditable="True" 
+                        <ComboBox x:Name="comboBoxFontSize" MinWidth="100" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}"
+                                  FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="2" Margin="2" IsEditable="True"
                               PreviewTextInput="NumberValidationTextBox" VerticalContentAlignment="Center">
-                            <ComboBoxItem Content="2"/>
-                            <ComboBoxItem Content="3"/>
-                            <ComboBoxItem Content="4"/>
-                            <ComboBoxItem Content="5"/>
-                            <ComboBoxItem Content="6"/>
-                            <ComboBoxItem Content="7"/>
-                            <ComboBoxItem Content="8"/>
-                            <ComboBoxItem Content="9"/>
-                            <ComboBoxItem Content="10"/>
-                            <ComboBoxItem Content="11"/>
-                            <ComboBoxItem Content="12"/>
-                            <ComboBoxItem Content="13"/>
-                            <ComboBoxItem Content="14"/>
-                            <ComboBoxItem Content="15"/>
-                            <ComboBoxItem Content="16"/>
-                            <ComboBoxItem Content="17"/>
-                            <ComboBoxItem Content="18"/>
-                            <ComboBoxItem Content="20"/>
-                            <ComboBoxItem Content="22"/>
-                            <ComboBoxItem Content="24"/>
-                            <ComboBoxItem Content="26"/>
-                            <ComboBoxItem Content="28"/>
-                            <ComboBoxItem Content="30"/>
-                            <ComboBoxItem Content="32"/>
-                            <ComboBoxItem Content="34"/>
-                            <ComboBoxItem Content="38"/>
-                            <ComboBoxItem Content="42"/>
-                            <ComboBoxItem Content="46"/>
-                            <ComboBoxItem Content="50"/>
+                            <ComboBoxItem Content="2" />
+                            <ComboBoxItem Content="3" />
+                            <ComboBoxItem Content="4" />
+                            <ComboBoxItem Content="5" />
+                            <ComboBoxItem Content="6" />
+                            <ComboBoxItem Content="7" />
+                            <ComboBoxItem Content="8" />
+                            <ComboBoxItem Content="9" />
+                            <ComboBoxItem Content="10" />
+                            <ComboBoxItem Content="11" />
+                            <ComboBoxItem Content="12" />
+                            <ComboBoxItem Content="13" />
+                            <ComboBoxItem Content="14" />
+                            <ComboBoxItem Content="15" />
+                            <ComboBoxItem Content="16" />
+                            <ComboBoxItem Content="17" />
+                            <ComboBoxItem Content="18" />
+                            <ComboBoxItem Content="20" />
+                            <ComboBoxItem Content="22" />
+                            <ComboBoxItem Content="24" />
+                            <ComboBoxItem Content="26" />
+                            <ComboBoxItem Content="28" />
+                            <ComboBoxItem Content="30" />
+                            <ComboBoxItem Content="32" />
+                            <ComboBoxItem Content="34" />
+                            <ComboBoxItem Content="38" />
+                            <ComboBoxItem Content="42" />
+                            <ComboBoxItem Content="46" />
+                            <ComboBoxItem Content="50" />
                         </ComboBox>
                         <Button x:Name="buttonFontColor" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxFonts}" Style="{StaticResource SystemSmallButton}" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditFontColor_Click">
-                            <Button x:Name="imageFontColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                            <Button x:Name="imageFontColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" />
                         </Button>
 
-                        <ToggleButton x:Name="buttonFontBold" Content="B" Style="{StaticResource SystemSmallToggleButton}" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" FontSize="20" Grid.Column="4" FontWeight="Bold"/>
-                        <ToggleButton x:Name="buttonFontItalic" Content="I" Style="{StaticResource SystemSmallToggleButton}" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" FontSize="20"  Grid.Column="5" FontStyle="Italic"/>
+                        <ToggleButton x:Name="buttonFontBold" Content="B" Style="{StaticResource SystemSmallToggleButton}" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" FontSize="20" Grid.Column="4" FontWeight="Bold" />
+                        <ToggleButton x:Name="buttonFontItalic" Content="I" Style="{StaticResource SystemSmallToggleButton}" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" FontSize="20"  Grid.Column="5" FontStyle="Italic" />
 
-                        <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Grid.ColumnSpan="6" Grid.Row="2" 
+                        <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Grid.ColumnSpan="6" Grid.Row="2"
                                        Style="{StaticResource InfoText}" >Changes made to fonts are applied after restart</TextBlock>
 
-
                         <!--Fonts Preview (Classic colors) -->
-                        <Frame Grid.Row="3" Margin="0 5 0 0" Grid.ColumnSpan="6" Source="Previews\Preview.xaml"/>
-                        <TextBlock Style="{DynamicResource HypertextTextBlockStyle}" Text="Launch sample window with Classic theme" MouseDown="openClassicWindowTextBlock_MouseDown" Grid.Row="4" Grid.ColumnSpan="6"/>
-                        <TextBlock Grid.Row="5" Grid.ColumnSpan="6" Style="{StaticResource InfoText}" 
+                        <Frame Grid.Row="3" Margin="0 5 0 0" Grid.ColumnSpan="6" Source="Previews\Preview.xaml" />
+                        <TextBlock Style="{DynamicResource HypertextTextBlockStyle}" Text="Launch sample window with Classic theme" MouseDown="openClassicWindowTextBlock_MouseDown" Grid.Row="4" Grid.ColumnSpan="6" />
+                        <TextBlock Grid.Row="5" Grid.ColumnSpan="6" Style="{StaticResource InfoText}"
                                    >The most of these font styles are not applied on modern UWP apps, because each of them uses their own settings.</TextBlock>
 
                         <!--The Apply buttons-->
                         <StackPanel Margin="-5 0 0 0" Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
-                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveFontsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveFontsAsTheme_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveFontsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveFontsAsTheme_Click" />
                             <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveFontsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveFontsToRegistry_Click" />
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
 
-
             <!--Wallpaper-->
             <TabItem x:Name="wallpaperTab" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ApplicationSettings.ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xEB9F;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xEB9F;" />
                         <Label Style="{DynamicResource SystemMenuLabel}">Wallpaper</Label>
                     </StackPanel>
                 </TabItem.Header>
@@ -394,71 +384,70 @@
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <Grid HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <!--Wallpaper type-->
-                        <StackPanel Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left" >
-                            <Label Style="{StaticResource SystemLabel}" Content="Wallpaper type: "/>
+                        <StackPanel Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
+                            <Label Style="{StaticResource SystemLabel}" Content="Wallpaper type: " />
                             <ComboBox MinWidth="250" x:Name="WallpaperTypeComboBox" ItemsSource="{Binding WallpaperSettings.WallpaperTypesStrings}" Style="{StaticResource SystemComboBox}"  DropDownClosed="WallpaperTypeComboBox_DropDownClosed"
                                        IsEditable="False" Text="{Binding WallpaperSettings.WallpaperType, Converter={StaticResource EnumToString}}">
                             </ComboBox>
                         </StackPanel>
                         <!--Wallpaper settings-->
                         <StackPanel Grid.Row="1">
-                            <Frame x:Name="WallpaperFrame" Visibility="Collapsed" NavigationUIVisibility="Hidden"/>
-                            <Frame x:Name="SlideshowFrame" Visibility="Collapsed" NavigationUIVisibility="Hidden"/>
-                            <Frame x:Name="ColorFrame" Visibility="Collapsed" NavigationUIVisibility="Hidden"/>
+                            <Frame x:Name="WallpaperFrame" Visibility="Collapsed" NavigationUIVisibility="Hidden" />
+                            <Frame x:Name="SlideshowFrame" Visibility="Collapsed" NavigationUIVisibility="Hidden" />
+                            <Frame x:Name="ColorFrame" Visibility="Collapsed" NavigationUIVisibility="Hidden" />
                         </StackPanel>
                         <!--The Apply buttons-->
                         <StackPanel Grid.Row="3" Margin="0 5" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveWallpaperAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveWallpaperAsTheme_Click"/>
-                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveWallpaperToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveWallpaperToRegistry_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveWallpaperAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveWallpaperAsTheme_Click" />
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveWallpaperToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveWallpaperToRegistry_Click" />
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
 
-
             <!--DWM and Registry Tab (win8 & win10)-->
             <TabItem x:Name="pageModern" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ApplicationSettings.ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;" />
                         <Label Style="{DynamicResource SystemMenuLabel}">Other Settings</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <!--Extra settings-->
                         <ItemsControl x:Name="listBoxDMW" BorderBrush="{x:Null}" Grid.Row="0" ItemsSource="{Binding RegistrySettingsViewModel.RegistrySettings}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <CheckBox Content="{Binding Name}" Margin="5" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                    <CheckBox Content="{Binding Name}" Margin="5" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <TextBlock Visibility="{Binding RegistrySettingsViewModel.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="1" Style="{StaticResource InfoText}" >Some of the changes made to these settings are applied after restart</TextBlock>
 
                         <StackPanel Grid.Row="2" HorizontalAlignment="Left" Margin="0 10">
-                            <Button x:Name="buttonRestartExplorer" Width="200" Margin="0 2" Content="Restart explorer.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartExplorer_Click"/>
-                            <Button x:Name="buttonRestartDwm" Width="200" Margin="0 2" Content="Restart dwm.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartDwm_Click"/>
+                            <Button x:Name="buttonRestartExplorer" Width="200" Margin="0 2" Content="Restart explorer.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartExplorer_Click" />
+                            <Button x:Name="buttonRestartDwm" Width="200" Margin="0 2" Content="Restart dwm.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartDwm_Click" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="3" Visibility="{Binding IsWindows10, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Label Style="{StaticResource SystemLabel}" Content="Program settings"/>
-                            <CheckBox Content="Use system titlebar (Win 10 and higher)" Margin="5" IsChecked="{Binding ApplicationSettings.UseNativeTitlebar}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            <Label Style="{StaticResource SystemLabel}" Content="Program settings" />
+                            <CheckBox Content="Use system titlebar (Win 10 and higher)" Margin="5" IsChecked="{Binding ApplicationSettings.UseNativeTitlebar}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </StackPanel>
 
                         <!--The Apply buttons-->
@@ -470,17 +459,16 @@
                 </ScrollViewer>
             </TabItem>
 
-
             <!--Restore-->
             <TabItem x:Name="restoreTab" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ApplicationSettings.ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xF61E;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xF61E;" />
                         <Label Style="{DynamicResource SystemMenuLabel}">Backup and Restore</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Frame x:Name="restoreTabFrame" NavigationUIVisibility="Hidden" Content="RestorePage.xaml" Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left"/>
+                    <Frame x:Name="restoreTabFrame" NavigationUIVisibility="Hidden" Content="RestorePage.xaml" Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left" />
                 </ScrollViewer>
             </TabItem>
         </TabControl>

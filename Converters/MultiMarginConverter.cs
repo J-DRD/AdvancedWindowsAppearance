@@ -9,26 +9,26 @@ using System.Windows.Data;
 
 namespace AdvancedWindowsAppearence.Converters
 {
-    public class MultiMarginConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            try { 
-                double x = double.Parse(values[0].ToString()) / 5d;
-                double y = double.Parse(values[1].ToString()) / 5d;
-                return new Thickness(x, y, x, y);
-            }
-            catch
-            {
-                Console.WriteLine("Error in MultiMarginConverter");
-            }
-            return null;
-            
-        }
+	public class MultiMarginConverter : IMultiValueConverter
+	{
+		public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+		{
+			try
+			{
+				double x = double.Parse(values[0].ToString()) / 5d;
+				double y = double.Parse(values[1].ToString()) / 5d;
+				return new Thickness(x, y, x, y);
+			}
+			catch
+			{
+				Console.WriteLine("Error in MultiMarginConverter");
+			}
+			return null;
+		}
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

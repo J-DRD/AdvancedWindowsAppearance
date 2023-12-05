@@ -15,41 +15,42 @@ using System.Windows.Shapes;
 
 namespace AdvancedWindowsAppearence.Previews
 {
-    /// <summary>
-    /// Interaction logic for ScreenslideSettingsPage.xaml
-    /// </summary>
-    public partial class SlideshowSettingsPage : Page
-    {
-        WallpaperSettings WallpaperSettings;
-        public SlideshowSettingsPage(WallpaperSettings wallpaperSettings)
-        {
-            WallpaperSettings = wallpaperSettings;
-            if (WallpaperSettings.Slideshow == null)
-                WallpaperSettings.CreateDefaultSlideshow();
-            InitializeComponent();
-            DataContext = WallpaperSettings;
-        }
+	/// <summary>
+	/// Interaction logic for ScreenslideSettingsPage.xaml
+	/// </summary>
+	public partial class SlideshowSettingsPage : Page
+	{
+		private WallpaperSettings WallpaperSettings;
 
-        private void ChangeFolderButton_Click(object sender, RoutedEventArgs e)
-        {
-            WallpaperSettings.Slideshow.ShowFolderDialogSlideshow();
-            ImagesListView.ItemsSource = WallpaperSettings.Slideshow.FolderImages;
-            WallpaperSettings.Slideshow.SelectAll();
-        }
+		public SlideshowSettingsPage(WallpaperSettings wallpaperSettings)
+		{
+			WallpaperSettings = wallpaperSettings;
+			if (WallpaperSettings.Slideshow == null)
+				WallpaperSettings.CreateDefaultSlideshow();
+			InitializeComponent();
+			DataContext = WallpaperSettings;
+		}
 
-        private void buttonSelectAll_Click(object sender, RoutedEventArgs e)
-        {
-            WallpaperSettings.Slideshow.SelectAll();
-        }
+		private void ChangeFolderButton_Click(object sender, RoutedEventArgs e)
+		{
+			WallpaperSettings.Slideshow.ShowFolderDialogSlideshow();
+			ImagesListView.ItemsSource = WallpaperSettings.Slideshow.FolderImages;
+			WallpaperSettings.Slideshow.SelectAll();
+		}
 
-        private void buttonClear_Click(object sender, RoutedEventArgs e)
-        {
-            WallpaperSettings.Slideshow.ClearSelection();
-        }
+		private void buttonSelectAll_Click(object sender, RoutedEventArgs e)
+		{
+			WallpaperSettings.Slideshow.SelectAll();
+		}
 
-        private void buttonRestartExplorer_Click(object sender, RoutedEventArgs e)
-        {
-            GeneralViewModel.RestartExplorer();
-        }
-    }
+		private void buttonClear_Click(object sender, RoutedEventArgs e)
+		{
+			WallpaperSettings.Slideshow.ClearSelection();
+		}
+
+		private void buttonRestartExplorer_Click(object sender, RoutedEventArgs e)
+		{
+			GeneralViewModel.RestartExplorer();
+		}
+	}
 }
